@@ -18,7 +18,7 @@ public class ScrGame extends ScrBase{
         super.show();
         Gdx.input.setInputProcessor(this);
         background = new Sprite(txtBackground);
-        room = new Room(0,0,"floor");
+        room = new Room(0,0,"floor.jpg");
         background.setFlip(false,true);
     }
 

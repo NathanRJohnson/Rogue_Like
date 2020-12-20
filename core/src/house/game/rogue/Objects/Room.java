@@ -27,6 +27,7 @@ public class Room extends Sprite {
         height = Constants.SCREEN_HEIGHT;
         setSize(width, height);
         setFlip(false, true);
+        doors = new int[4];
         doors[Constants.NORTH] = 0;
         doors[Constants.SOUTH] = 0;
         doors[Constants.EAST] = 0;
