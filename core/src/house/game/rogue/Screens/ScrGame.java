@@ -5,9 +5,12 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import house.game.rogue.Objects.Room;
 
 import house.game.rogue.Menu.MainMenu;
+import house.game.rogue.Player;
 
 public class ScrGame extends ScrBase{
     private Room room;
+    private Player player;
+
     public ScrGame(MainMenu _mainMenu) {
         super();
         menu = _mainMenu;
@@ -20,6 +23,8 @@ public class ScrGame extends ScrBase{
         background = new Sprite(txtBackground);
         room = new Room(0,0,"floor.jpg");
         background.setFlip(false,true);
+        player = new Player("Kirby.png");
+
     }
 
     @Override
@@ -28,7 +33,10 @@ public class ScrGame extends ScrBase{
         batch.begin();
         batch.draw(background, 0, 0, 1000, 900);
         room.draw(batch);
+        player.move();
+        batch.draw(player.getImg(), player.getVarX(), player.getVarY());
         batch.end();
+
     }
 
     @Override
