@@ -2,7 +2,6 @@ package house.game.rogue.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import house.game.rogue.Main;
 import house.game.rogue.Menu.MainMenu;
 
 public class DesktopLauncher {

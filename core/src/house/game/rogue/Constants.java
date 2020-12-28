@@ -8,6 +8,6 @@ public class Constants {
     public final static int EAST = 2;
     public final static int WEST = 3;
 
-    public final static int SCREEN_WIDTH = 1000;
-    public final static int SCREEN_HEIGHT = 900;
+    public final static float SCREEN_WIDTH = 1000;
+    public final static float SCREEN_HEIGHT = 900;
 }

@@ -1,42 +1,39 @@
 package house.game.rogue.Screens;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import house.game.rogue.Objects.Room;
 
 import house.game.rogue.Menu.MainMenu;
-import house.game.rogue.Player;
+import house.game.rogue.Objects.Player;
 
-public class ScrGame extends ScrBase{
+import static house.game.rogue.Constants.*;
+
+public class ScrGame extends ScrBase {
     private Room room;
     private Player player;
 
     public ScrGame(MainMenu _mainMenu) {
         super();
         menu = _mainMenu;
-        txtBackground = new Texture("floor.jpg");
     }
 
     public void show() {
         super.show();
         Gdx.input.setInputProcessor(this);
-        background = new Sprite(txtBackground);
         room = new Room(0,0,"floor.jpg");
-        background.setFlip(false,true);
         player = new Player("Kirby.png");
-
     }
 
     @Override
     public void render(float delta) {
         batch.setProjectionMatrix(oc.combined);
+//     Please keep methods that are not related to drawing things to the screen
+//     outside of the batch
         batch.begin();
-        batch.draw(background, 0, 0, 1000, 900);
-        room.draw(batch);
-        player.move();
-        batch.draw(player.getImg(), player.getVarX(), player.getVarY());
+        batch.draw(room, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        batch.draw(player, player.getVarX(), player.getVarY(), player.getWidth(),player.getHeight());
         batch.end();
 
+        player.move();
     }
 
     @Override
