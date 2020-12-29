@@ -6,19 +6,23 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
+import static house.game.rogue.Constants.*;
+
 //Player is an object, so it belongs in the Objects package
 public class Player extends Sprite implements InputProcessor {
     // changed ints to floats
     private float varX;
     private float varY;
+    private float speed;
     //added variables to control width and height
     private float width, height;
 
     public Player(String texture) {
 //      When creating a derived class (a class which extends something, you should to call super in the constructor
         super(new Texture(texture));
-        varY = 0;
-        varX = 0;
+        varY = SCREEN_HEIGHT/2;
+        varX = SCREEN_WIDTH/2;
+        speed = 7;
         setFlip(false,true);
         setPosition(varX, varY);
         width = height = 300;
@@ -39,14 +43,14 @@ public class Player extends Sprite implements InputProcessor {
     public float getHeight() { return height;}
 
     public void move() {
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            varX--;
-        } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            varX++;
-        } else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            varY--;
-        } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            varY++;
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
+            varX -= speed;
+        } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) {
+            varX += speed;
+        } else if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) {
+            varY -= speed;
+        } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) {
+            varY += speed;
         }
     }
 
