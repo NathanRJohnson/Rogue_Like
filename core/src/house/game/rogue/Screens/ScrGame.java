@@ -1,6 +1,6 @@
 package house.game.rogue.Screens;
 import com.badlogic.gdx.Gdx;
-import house.game.rogue.Objects.Room;
+import house.game.rogue.Objects.Rooms.Room;
 
 import house.game.rogue.Menu.MainMenu;
 import house.game.rogue.Objects.Player;
