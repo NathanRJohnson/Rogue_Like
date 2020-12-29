@@ -54,6 +54,11 @@ public class Player extends Sprite implements InputProcessor {
         }
     }
 
+    public void setPosition(float x, float y){
+        varX = x;
+        varY = y;
+    }
+
     @Override
     public boolean keyDown(int keycode) {
         return false;
