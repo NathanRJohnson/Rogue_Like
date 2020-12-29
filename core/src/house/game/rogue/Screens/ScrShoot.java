@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import house.game.rogue.Menu.MainMenu;
 import house.game.rogue.Objects.Player;
-import house.game.rogue.Objects.Room;
+import house.game.rogue.Objects.Rooms.Room;
 
 import static house.game.rogue.Constants.SCREEN_HEIGHT;
 import static house.game.rogue.Constants.SCREEN_WIDTH;
