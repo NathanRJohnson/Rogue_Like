@@ -10,10 +10,12 @@ import java.util.ArrayList;
 import static com.badlogic.gdx.math.MathUtils.floor;
 import static com.badlogic.gdx.math.MathUtils.random;
 
+/**
+ * Manages the generation of the dungeon
+ */
 public class Grid {
     private Cell[][] grid;
     private int rows, columns;
-//    private ArrayList<Door> doors;
     private BossRoom b;
     private StartRoom s;
     private Walker walker;
@@ -40,6 +42,12 @@ public class Grid {
         rows = _rows;
     }
 
+    /**
+     * Sets the start and end rooms
+     *
+     * Randomly selects two different cell spaces, and marks them as the boss and start rooms respectively
+     * Sets the position of the walker
+     */
     public void setRooms() {
         int randomCol = random(columns - 1);
         int randomRow = random(rows - 1);
@@ -58,33 +66,44 @@ public class Grid {
         walker = new Walker(randomCol2, randomRow2, columns, rows);
     }
 
+    /**
+     * Generates the dungeon layout
+     *
+     * The walker steps around the grid of cells, starting at the start cell, and ending
+     * when it arrives in the boss cell. When the walker steps into a grid space, it generates a new room,
+     * and places a door on the wall it passed through in the previous room, and a door on the opposite wall
+     * in the new room.
+     */
     public void computePath() {
+        //End position of the walker
         Vector2 boss_coordinates = b.getGridPos();
+        //Starting Position of the walker
         Vector2 walker_start_pos;
         Vector2 direction;
         System.out.println(s.getGridPos() + " " + boss_coordinates);
+
+        // Until we reach the boss room
         while (!walker.getGridPos().equals(boss_coordinates)) {
-
+            //Find the curent grid position of the walker
             walker_start_pos = walker.getGridPos();
-            direction = walker.computeDirection(columns, rows) ;
-
+            //Create a random direction for it to step (within bounds)
+            direction = walker.computeDirection(columns, rows);
+            //calculate the grid position of the walker after it has taken the step
             Vector2 newpos = walker.step(direction);
+
+            //Create a new room, if it is not already a room
             if (!newpos.equals(b.getGridPos())&& !newpos.equals(s.getGridPos()) && !(grid[floor(newpos.x)][floor(newpos.y)] instanceof Room)) {
                 Room r = new Room((int)newpos.x, (int)newpos.y);
                 grid[floor(newpos.x)][floor(newpos.y)] = r;
             }
-            Door d = new Door(direction);
-            //if (!exists(d)) {
+            //Create a new door in the previous room on the wall we stepped through
             grid[floor(walker_start_pos.x)][floor(walker_start_pos.y)].addDoor(direction);
-//            doors.add(d);
-            //}
+
+            //Create a new door on the opposite wall in the new room
             Vector2 inverse = direction.cpy();
             inverse.scl(-1);
             inverse.nor();
-//            //if (!exists(d)) {
             grid[floor(newpos.x)][floor(newpos.y)].addDoor(inverse);
-
-//            //}
         }
     }
 

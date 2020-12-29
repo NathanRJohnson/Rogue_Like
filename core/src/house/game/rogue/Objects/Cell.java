@@ -8,6 +8,9 @@ import java.util.ArrayList;
 
 import static house.game.rogue.Constants.*;
 
+/**
+ * Acts as a place holder for actual rooms in the grid
+ */
 public class Cell extends Sprite {
     protected int rowx, colx;
     protected ArrayList<Door> doors;
@@ -30,14 +33,18 @@ public class Cell extends Sprite {
         doors = new ArrayList<Door>();
     }
 
-    public void addDoor(Vector2 direction) {
-        if (!hasDoor(direction)){
-            doors.add(new Door(direction));
-            if (direction.equals(NORTH)) {
+    /**
+     * Adds a door to the room if there isn't one already
+     * @param wall NORTH, SOUTH, WEST, or EAST
+     */
+    public void addDoor(Vector2 wall) {
+        if (!hasDoor(wall)){
+            doors.add(new Door(wall));
+            if (wall.equals(NORTH)) {
                 door_index[0] = ACTIVE;
-            } else if (direction.equals(SOUTH)) {
+            } else if (wall.equals(SOUTH)) {
                 door_index[1] = ACTIVE;
-            } else if (direction.equals(EAST)) {
+            } else if (wall.equals(EAST)) {
                 door_index[2] = ACTIVE;
             } else { //WEST
                 door_index[3] = ACTIVE;
@@ -49,12 +56,17 @@ public class Cell extends Sprite {
         return doors;
     }
 
-    public boolean hasDoor(Vector2 direction) {
-        if (direction.equals(NORTH)) {
+    /**
+     *
+     * @param wall that you want to check (NORTH, SOUTH, EAST, WEST)
+     * @return trye if a door exists on that wall, false otherwise
+     */
+    public boolean hasDoor(Vector2 wall) {
+        if (wall.equals(NORTH)) {
             return door_index[0] == ACTIVE;
-        } else if (direction.equals(SOUTH)) {
+        } else if (wall.equals(SOUTH)) {
             return door_index[1] == ACTIVE;
-        } else if (direction.equals(EAST)) {
+        } else if (wall.equals(EAST)) {
             return door_index[2] == ACTIVE;
         } else { //WEST
             return door_index[3] == ACTIVE;

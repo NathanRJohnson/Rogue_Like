@@ -56,7 +56,7 @@ public class ScrGeneration extends ScrBase{
                 System.out.println(currentPos);
                 room = g.getRoom(currentPos);
                 doors = room.getDoors();
-                player.setPosition(SCREEN_WIDTH/2,  SCREEN_HEIGHT/2);
+                player.setPosition(d.getExitPosition().x, d.getExitPosition().y);
             }
         }
         player.move();
