@@ -18,7 +18,6 @@ public class ScrGeneration extends ScrBase{
     private Grid g;
     private Vector2 currentPos = new Vector2();
     private ArrayList<Door> doors;
-    private float x, y;
 
     public ScrGeneration(MainMenu _mainMenu) {
         super();
@@ -30,20 +29,16 @@ public class ScrGeneration extends ScrBase{
         super.show();
         Gdx.input.setInputProcessor(this);
         player = new Player("Kirby.png");
-        g = new Grid(6);
+        g = new Grid(4);
         g.setRooms();
         g.computePath();
         currentPos.set(g.getStartRoom());
         room = g.getRoom(currentPos);
         doors = room.getDoors();
-        x = player.getVarX();
-        y = player.getVarY();
     }
 
     @Override
     public void render(float delta) {
-        x = player.getVarX();
-        y = player.getVarY();
         batch.setProjectionMatrix(oc.combined);
 //     Please keep methods that are not related to drawing things to the screen
 //     outside of the batch
@@ -52,7 +47,7 @@ public class ScrGeneration extends ScrBase{
         for (Door d: doors){
             batch.draw(d, d.getPosition().x, d.getPosition().y, 100, 100);
         }
-        batch.draw(player, x, y, 150,150);
+        batch.draw(player, player.getVarX(), player.getVarY(), 150,150);
         batch.end();
 
         for (Door d: doors){
@@ -61,8 +56,7 @@ public class ScrGeneration extends ScrBase{
                 System.out.println(currentPos);
                 room = g.getRoom(currentPos);
                 doors = room.getDoors();
-                x = SCREEN_WIDTH/2;
-                y = SCREEN_HEIGHT/2;
+                player.setPosition(SCREEN_WIDTH/2,  SCREEN_HEIGHT/2);
             }
         }
         player.move();
@@ -72,6 +66,5 @@ public class ScrGeneration extends ScrBase{
     @Override
     public void dispose(){
         batch.dispose();
-        txtBackground.dispose();
     }
 }

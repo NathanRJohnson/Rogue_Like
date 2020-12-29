@@ -54,8 +54,8 @@ public class Walker {
     }
 
     public Vector2 step(Vector2 _step){
-        current_column += floor(_step.x);
-        current_row += floor(_step.y);
+        current_column += (int)_step.x;
+        current_row += (int)_step.y;
         return new Vector2(current_column, current_row);
     }
 

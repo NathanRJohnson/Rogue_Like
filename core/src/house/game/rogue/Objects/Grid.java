@@ -13,7 +13,7 @@ import static com.badlogic.gdx.math.MathUtils.random;
 public class Grid {
     private Cell[][] grid;
     private int rows, columns;
-    private ArrayList<Door> doors;
+//    private ArrayList<Door> doors;
     private BossRoom b;
     private StartRoom s;
     private Walker walker;
@@ -24,7 +24,7 @@ public class Grid {
         }
         columns = rows = size;
         grid = new Cell[columns][rows];
-        doors = new ArrayList<Door>();
+
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 grid[i][j] = new Cell(columns, rows);
@@ -63,7 +63,6 @@ public class Grid {
         Vector2 walker_start_pos;
         Vector2 direction;
         System.out.println(s.getGridPos() + " " + boss_coordinates);
-        System.out.println("Outer");
         while (!walker.getGridPos().equals(boss_coordinates)) {
 
             walker_start_pos = walker.getGridPos();
@@ -77,15 +76,15 @@ public class Grid {
             Door d = new Door(direction);
             //if (!exists(d)) {
             grid[floor(walker_start_pos.x)][floor(walker_start_pos.y)].addDoor(direction);
-            doors.add(d);
+//            doors.add(d);
             //}
             Vector2 inverse = direction.cpy();
-            inverse.rotateDeg(180);
-            d = new Door(inverse);
-            //if (!exists(d)) {
+            inverse.scl(-1);
+            inverse.nor();
+//            //if (!exists(d)) {
             grid[floor(newpos.x)][floor(newpos.y)].addDoor(inverse);
-            doors.add(d);
-            //}
+
+//            //}
         }
     }
 
